@@ -25,19 +25,7 @@
 //     );
 //   }
 // }
-
-const Button = ({ color, text }) => {
-  return (
-    <>
-      <button
-        className={`h-10 m-4 px-6 font-semibold rounded-full ${color} text-white`}
-        type="submit"
-      >
-        {text}
-      </button>
-    </>
-  );
-};
+import Button from "./components/elements/button/Button";
 
 function App() {
   return (
@@ -46,6 +34,7 @@ function App() {
         <Button color={"bg-red-600"} text={"Login"} />
         <Button color={"bg-purple-600"} text={"Logout"} />
         <Button color={"bg-gray-600"} text={"Register"} />
+        <Button />
       </div>
     </>
   );
