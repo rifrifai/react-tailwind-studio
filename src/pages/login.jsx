@@ -9,6 +9,7 @@ export default function LoginPage() {
         <FormLogin />
         <p className="text-sm mt-3 text-center">
           Don&apos;t have an account? {""}
+          {/* Link to di namakan client side routing */}
           <Link to="/register" className="font-bold text-blue-600">
             Sign up
           </Link>
