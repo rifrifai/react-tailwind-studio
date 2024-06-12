@@ -12,6 +12,7 @@ export default function AuthLayouts({ children, title, login, register }) {
             Welcome, Please enter your details!
           </p>
           {children}
+          {/* <Navigation login="login" register="register" /> */}
           <p className="text-sm mt-3 text-center">
             {login ? "Don't have an account? " : "Already have an account? "}
 
@@ -33,33 +34,24 @@ export default function AuthLayouts({ children, title, login, register }) {
   );
 }
 
-{
-  /* <Navigation login="login" register="register" /> */
-}
-// dibawah ini masih pusing butuh mentor!
-// function Navigation({ login, register }) {
+// const Navigation = ({ login, register }) => {
 //   if (login) {
 //     return (
-//       <>
-//         <p className="text-sm mt-3 text-center">
-//           Don't have an account? {""}
-//           <Link to="/register" className="font-bold text-blue-600">
-//             Sign Up
-//           </Link>
-//         </p>
-//       </>
+//       <p className="text-sm mt-3 text-center">
+//         Don't have an account?{" "}
+//         <Link to="/register" className="font-bold text-blue-600">
+//           Sign up
+//         </Link>
+//       </p>
 //     );
-//   }
-//   if (register) {
+//   } else {
 //     return (
-//       <>
-//         <p className="text-sm mt-3 text-center">
-//           Already have an account? {""}
-//           <Link to="/login" className="font-bold text-blue-600">
-//             Login
-//           </Link>
-//         </p>
-//       </>
+//       <p className="text-sm mt-3 text-center">
+//         Already have an account?
+//         <Link to="/login" className="font-bold text-blue-600">
+//           Login
+//         </Link>
+//       </p>
 //     );
 //   }
-// }
+// };
