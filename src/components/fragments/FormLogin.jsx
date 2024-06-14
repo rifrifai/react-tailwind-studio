@@ -5,10 +5,13 @@ import Button from "../elements/button/Button";
 export default function FormLogin() {
   const handleLogin = (e) => {
     e.preventDefault();
+
+    localStorage.setItem("email", event.target.email.value);
+    localStorage.setItem("password", event.target.password.value);
     // untuk meng console data login
-    console.info(event.target.email.value);
-    console.info(event.target.password.value);
-    console.log("Login Successful");
+    // console.info(event.target.email.value);
+    // console.info(event.target.password.value);
+    window.location.href = "/products";
   };
 
   return (
