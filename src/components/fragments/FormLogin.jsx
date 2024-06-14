@@ -18,7 +18,7 @@ export default function FormLogin() {
           placeholder="********"
           name="password"
         />
-        <Button text="Login" />
+        <Button text="Login" classname="bg-blue-600 w-full" />
       </form>
     </>
   );

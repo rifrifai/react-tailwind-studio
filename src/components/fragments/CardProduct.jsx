@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import Button from "../elements/button/Button";
 export default function CardProduct({ children }) {
   return (
     <>
@@ -39,9 +40,10 @@ function Footer({ price }) {
     <>
       <div className="flex items-center justify-between px-5 pb-5">
         <span className="text-xl font-bold text-white">{price}</span>
-        <button className="bg-blue-600 rounded p-2 text-white font-medium">
-          Add To Cart
-        </button>
+        <Button
+          classname="bg-blue-600 rounded p-2 text-white font-medium"
+          text="Add To Cart"
+        />
       </div>
     </>
   );
