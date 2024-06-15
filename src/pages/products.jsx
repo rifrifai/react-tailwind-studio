@@ -1,4 +1,5 @@
 import CardProduct from "../components/fragments/CardProduct";
+import Counter from "../components/fragments/Counter";
 
 const products = [
   {
@@ -67,6 +68,9 @@ export default function ProductsPage() {
             <CardProduct.Footer price={product.price} />
           </CardProduct>
         ))}
+      </div>
+      <div className="flex justify-center w-100">
+        <Counter />
       </div>
     </>
   );
