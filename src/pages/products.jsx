@@ -31,7 +31,7 @@ const email = localStorage.getItem("email");
 export default function ProductsPage() {
   const [cart, setCart] = useState([
     {
-      name: "New Nike Air 1",
+      id: 1,
       qty: 1,
     },
   ]);
@@ -40,6 +40,19 @@ export default function ProductsPage() {
     localStorage.removeItem("email");
     localStorage.removeItem("password");
     window.location.href = "/login";
+  };
+
+  const handleAddToCart = (id) => {
+    // cara menambahkan qty
+    if (cart.find((item) => item.id === id)) {
+      setCart(
+        cart.map((item) =>
+          item.id === id ? { ...item, qty: item.qty + 1 } : item
+        )
+      );
+    } else {
+      setCart([...cart, { id, qty: 1 }]);
+    }
   };
 
   return (
@@ -65,19 +78,60 @@ export default function ProductsPage() {
               <CardProduct.Body name={product.name}>
                 {product.description}
               </CardProduct.Body>
-              <CardProduct.Footer price={product.price} />
+              <CardProduct.Footer
+                price={product.price}
+                id={product.id}
+                handleAddToCart={handleAddToCart}
+              />
             </CardProduct>
           ))}
         </div>
         <div className="w-1/4">
-          <h1 className="text-3xl font-bold text-blue-600">Cart</h1>
-          <ul>
+          <h1 className="text-3xl font-bold text-blue-600 ml-5 mb-2">Cart</h1>
+          {/* <ul>
             {cart.map((item) => (
-              <li key={item.name}>
-                {item.name} - {item.qty}
+              <li key={item}>
+                {item.id} - {item.qty}
               </li>
             ))}
-          </ul>
+          </ul> */}
+          <table className="text-left table-auto border-separate border-spacing-x-5 ">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.map((item) => {
+                const product = products.find(
+                  (product) => product.id === item.id
+                );
+                return (
+                  <tr key={item.id}>
+                    <td>{product.name}</td>
+                    <td>
+                      Rp.{" "}
+                      {product.price.toLocaleString("id-ID", {
+                        styles: "currency",
+                        currency: "IDR",
+                      })}
+                    </td>
+                    <td>{item.qty}</td>
+                    <td>
+                      Rp.{" "}
+                      {(item.qty * product.price).toLocaleString("id-ID", {
+                        styles: "currency",
+                        currency: "IDR",
+                      })}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
       {/* <div className="flex justify-center w-100"><Counter />
