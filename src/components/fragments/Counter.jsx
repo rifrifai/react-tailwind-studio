@@ -1,5 +1,6 @@
 import React from "react";
 
+// dibawah ini dinamakan stateful component
 class Counter extends React.Component {
   constructor(props) {
     super(props);

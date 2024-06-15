@@ -1,11 +1,12 @@
 import CardProduct from "../components/fragments/CardProduct";
-import Counter from "../components/fragments/Counter";
+import { useState } from "react";
+// import Counter from "../components/fragments/Counter";
 
 const products = [
   {
     id: 1,
     name: "New Nike Air 1",
-    price: "Rp. 1.000.000",
+    price: 1000000,
     image: "/images/shoes-1.jpg",
     description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia quae ad voluptatem maiores nobis esse, dolore animi rerum temporibus excepturi. Ipsa accusamus harum facilis quos ex consequatur sequi quasi ad?`,
   },
@@ -13,14 +14,14 @@ const products = [
   {
     id: 2,
     name: "Adidas Black Current",
-    price: "Rp. 3.999.000",
+    price: 3990000,
     image: "/images/shoes-2.jpg",
     description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa accusamus harum facilis quos ex consequatur sequi quasi ad?`,
   },
   {
     id: 3,
     name: "Black Mamba Puma",
-    price: "Rp. 2.499.000",
+    price: 2499000,
     image: "/images/shoes-3.jpg",
     description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae obcaecati expedita minus adipisci cumque quaerat fuga, dolorem aliquam quia nulla. Quos quaerat labore natus, enim quae maxime dolore distinctio unde.`,
   },
@@ -28,6 +29,13 @@ const products = [
 
 const email = localStorage.getItem("email");
 export default function ProductsPage() {
+  const [cart, setCart] = useState([
+    {
+      name: "New Nike Air 1",
+      qty: 1,
+    },
+  ]);
+
   const handleLogout = () => {
     localStorage.removeItem("email");
     localStorage.removeItem("password");
@@ -42,36 +50,50 @@ export default function ProductsPage() {
           onClick={handleLogout}
           className="bg-black ml-5 h-10 px-6 font-semibold rounded-md"
         >
-          Login
+          Logout
         </button>
       </div>
       <div className="flex justify-center py-5">
-        {/* nested component */}
-        {/* <CardProduct>
-          <CardProduct.Header image="/images/shoes-1.jpg" />
-          <CardProduct.Body title="New Nike Air 1">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia quae
-            ad voluptatem maiores nobis esse, dolore animi rerum temporibus
-            excepturi. Ipsa accusamus harum facilis quos ex consequatur sequi
-            quasi ad?
-          </CardProduct.Body>
-          <CardProduct.Footer price="Rp. 1.000.000" />
-        </CardProduct> */}
+        {/* ... nested component */}
 
         {/* rendering list  */}
-        {products.map((product) => (
-          <CardProduct key={product.id}>
-            <CardProduct.Header image={product.image} />
-            <CardProduct.Body name={product.name}>
-              {product.description}
-            </CardProduct.Body>
-            <CardProduct.Footer price={product.price} />
-          </CardProduct>
-        ))}
+        <div className="w-3/4 flex flex-wrap">
+          {" "}
+          {products.map((product) => (
+            <CardProduct key={product.id}>
+              <CardProduct.Header image={product.image} />
+              <CardProduct.Body name={product.name}>
+                {product.description}
+              </CardProduct.Body>
+              <CardProduct.Footer price={product.price} />
+            </CardProduct>
+          ))}
+        </div>
+        <div className="w-1/4">
+          <h1 className="text-3xl font-bold text-blue-600">Cart</h1>
+          <ul>
+            {cart.map((item) => (
+              <li key={item.name}>
+                {item.name} - {item.qty}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className="flex justify-center w-100">
-        <Counter />
-      </div>
+      {/* <div className="flex justify-center w-100"><Counter />
+      </div> */}
     </>
   );
 }
+
+// {/* nested component */}
+//         {/* <CardProduct>
+//           <CardProduct.Header image="/images/shoes-1.jpg" />
+//           <CardProduct.Body title="New Nike Air 1">
+//             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia quae
+//             ad voluptatem maiores nobis esse, dolore animi rerum temporibus
+//             excepturi. Ipsa accusamus harum facilis quos ex consequatur sequi
+//             quasi ad?
+//           </CardProduct.Body>
+//           <CardProduct.Footer price="Rp. 1.000.000" />
+//         </CardProduct> */}

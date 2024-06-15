@@ -3,7 +3,7 @@ import Button from "../elements/button/Button";
 export default function CardProduct({ children }) {
   return (
     <>
-      <div className="w-full max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow mx-2 flex flex-col justify-between">
+      <div className="w-full my-2 max-w-sm bg-gray-800 border border-gray-700 rounded-lg shadow mx-2 flex flex-col justify-between">
         {children}
       </div>
     </>
@@ -14,7 +14,7 @@ function Header({ image }) {
   return (
     <>
       <a href="#">
-        <img src={image} alt="shoes-1" className="p-8 rounded-t-lg" />
+        <img src={image} alt="shoes-1" className="p-8 rounded-t-lg w-72 h-64" />
       </a>
     </>
   );
