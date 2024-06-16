@@ -7,7 +7,15 @@ class Counter extends React.Component {
     this.state = {
       count: 0,
     };
+    console.info("constructor");
   }
+
+  // menggantikan nilai default
+  componentDidMount() {
+    this.setState({ count: 5 });
+    console.info("componentDidMount");
+  }
+
   render() {
     return (
       <div className="flex items-center">
@@ -24,6 +32,7 @@ class Counter extends React.Component {
         >
           +
         </button>
+        {console.info("render")}
       </div>
     );
   }
