@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 
 // dibawah ini dinamakan stateful component
@@ -10,10 +11,19 @@ class Counter extends React.Component {
     console.info("constructor");
   }
 
+  // didmount dan didupdate hanya bisa digunakan di class component atau stateful component
   // menggantikan nilai default
   componentDidMount() {
-    this.setState({ count: 5 });
+    this.setState({ count: 1 });
     console.info("componentDidMount");
+  }
+
+  // kalau tidak menggunakan kondisi maka tidak jalan
+  componentDidUpdate(prevProps, prevState) {
+    console.info("componentDidUpdate");
+    if (this.state.count === 10) {
+      this.setState({ count: 0 });
+    }
   }
 
   render() {
