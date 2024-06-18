@@ -33,15 +33,21 @@ export default function ProductsPage() {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
-    setCart([{ id: 1, qty: 1 }]);
+    // parsing data cart dari local storage
+    setCart(JSON.parse(localStorage.getItem("cart")) || []);
   }, []);
 
+  // penggunaan useEffect terhadap total harga
   useEffect(() => {
-    cart.reduce((acc, item) => {
-      const product = products.find((product) => product.id === item.id);
-      return acc + product.price * item.qty;
-    }, 0);
-    setTotalPrice(sum);
+    if (cart.length > 0) {
+      const sum = cart.reduce((acc, item) => {
+        const product = products.find((product) => product.id === item.id);
+        return acc + product.price * item.qty;
+      }, 0);
+      setTotalPrice(sum);
+      // penyimpanan data cart ke local storage
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   }, [cart]);
 
   const handleLogout = () => {
