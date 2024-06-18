@@ -36,6 +36,14 @@ export default function ProductsPage() {
     setCart([{ id: 1, qty: 1 }]);
   }, []);
 
+  useEffect(() => {
+    cart.reduce((acc, item) => {
+      const product = products.find((product) => product.id === item.id);
+      return acc + product.price * item.qty;
+    }, 0);
+    setTotalPrice(sum);
+  }, [cart]);
+
   const handleLogout = () => {
     localStorage.removeItem("email");
     localStorage.removeItem("password");
