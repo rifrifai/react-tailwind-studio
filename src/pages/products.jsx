@@ -29,12 +29,8 @@ const products = [
 
 const email = localStorage.getItem("email");
 export default function ProductsPage() {
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      qty: 1,
-    },
-  ]);
+  const [cart, setCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleLogout = () => {
     localStorage.removeItem("email");
@@ -130,6 +126,20 @@ export default function ProductsPage() {
                   </tr>
                 );
               })}
+              <tr>
+                <td colSpan={3}>
+                  <b>Amount</b>
+                </td>
+                <td>
+                  <b>
+                    Rp.{" "}
+                    {totalPrice.toLocaleString("id-ID", {
+                      styles: "currency",
+                      currency: "IDR",
+                    })}
+                  </b>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
