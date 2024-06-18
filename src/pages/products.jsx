@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import CardProduct from "../components/fragments/CardProduct";
 import { useState } from "react";
 // import Counter from "../components/fragments/Counter";
@@ -31,6 +32,9 @@ const email = localStorage.getItem("email");
 export default function ProductsPage() {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    setCart([{ id: 1, qty: 1 }]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("email");
