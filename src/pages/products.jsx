@@ -69,12 +69,12 @@ export default function ProductsPage() {
   };
 
   // useRef
-  const cartRef = useRef([
-    {
-      id: 1,
-      qty: 1,
-    },
-  ]);
+  const cartRef = useRef(JSON.parse(localStorage.getItem("cart")) || []);
+
+  const handleAddToCartRef = (id) => {
+    cartRef.current = [...cartRef.current, { id, qty: 1 }];
+    localStorage.setItem("cart", JSON.stringify(cartRef.current));
+  };
 
   return (
     <>
@@ -102,7 +102,7 @@ export default function ProductsPage() {
               <CardProduct.Footer
                 price={product.price}
                 id={product.id}
-                handleAddToCart={handleAddToCart}
+                handleAddToCart={handleAddToCartRef}
               />
             </CardProduct>
           ))}
