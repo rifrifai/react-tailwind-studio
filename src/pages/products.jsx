@@ -27,6 +27,9 @@ const products = [
   },
 ];
 
+// penggunaan useState akan langung di render/ tampilkan
+//  kalau useRef datanya disimpan tapi tampilannya tidk berubah
+
 const email = localStorage.getItem("email");
 export default function ProductsPage() {
   const [cart, setCart] = useState([]);
@@ -102,7 +105,7 @@ export default function ProductsPage() {
               <CardProduct.Footer
                 price={product.price}
                 id={product.id}
-                handleAddToCart={handleAddToCartRef}
+                handleAddToCart={handleAddToCart}
               />
             </CardProduct>
           ))}
@@ -126,7 +129,7 @@ export default function ProductsPage() {
               </tr>
             </thead>
             <tbody>
-              {cartRef.current.map((item) => {
+              {cart.map((item) => {
                 const product = products.find(
                   (product) => product.id === item.id
                 );
@@ -151,7 +154,7 @@ export default function ProductsPage() {
                   </tr>
                 );
               })}
-              {/* <tr>
+              <tr>
                 <td colSpan={3}>
                   <b>Amount</b>
                 </td>
@@ -164,7 +167,7 @@ export default function ProductsPage() {
                     })}
                   </b>
                 </td>
-              </tr> */}
+              </tr>
             </tbody>
           </table>
         </div>
