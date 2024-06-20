@@ -1,6 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import CardProduct from "../components/fragments/CardProduct";
-import { useState } from "react";
 // import Counter from "../components/fragments/Counter";
 
 const products = [
@@ -69,6 +68,14 @@ export default function ProductsPage() {
     }
   };
 
+  // useRef
+  const cartRef = useRef([
+    {
+      id: 1,
+      qty: 1,
+    },
+  ]);
+
   return (
     <>
       <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10">
@@ -119,7 +126,7 @@ export default function ProductsPage() {
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => {
+              {cartRef.current.map((item) => {
                 const product = products.find(
                   (product) => product.id === item.id
                 );
@@ -144,7 +151,7 @@ export default function ProductsPage() {
                   </tr>
                 );
               })}
-              <tr>
+              {/* <tr>
                 <td colSpan={3}>
                   <b>Amount</b>
                 </td>
@@ -157,7 +164,7 @@ export default function ProductsPage() {
                     })}
                   </b>
                 </td>
-              </tr>
+              </tr> */}
             </tbody>
           </table>
         </div>
