@@ -72,12 +72,15 @@ export default function ProductsPage() {
   };
 
   // useRef
+  // berfungsi untuk menyimpan data tetapi dan tampilannya tidak berubah
   const cartRef = useRef(JSON.parse(localStorage.getItem("cart")) || []);
 
   const handleAddToCartRef = (id) => {
     cartRef.current = [...cartRef.current, { id, qty: 1 }];
     localStorage.setItem("cart", JSON.stringify(cartRef.current));
   };
+
+  const totalPriceRef = useRef(null);
 
   return (
     <>
@@ -154,7 +157,7 @@ export default function ProductsPage() {
                   </tr>
                 );
               })}
-              <tr>
+              <tr ref={totalPriceRef}>
                 <td colSpan={3}>
                   <b>Amount</b>
                 </td>
