@@ -82,6 +82,14 @@ export default function ProductsPage() {
 
   const totalPriceRef = useRef(null);
 
+  useEffect(() => {
+    if (cart.length > 0) {
+      totalPriceRef.current.style.display = "block";
+    } else {
+      totalPriceRef.current.style.display = "none";
+    }
+  });
+
   return (
     <>
       <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10">
