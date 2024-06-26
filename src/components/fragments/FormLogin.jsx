@@ -2,6 +2,7 @@
 import InputForm from "../elements/input/Index";
 import Button from "../elements/button/Button";
 import { useRef } from "react";
+import { useEffect } from "react";
 
 export default function FormLogin() {
   const handleLogin = (e) => {
@@ -16,6 +17,10 @@ export default function FormLogin() {
   };
 
   const emailRef = useRef(null);
+  // berfungsi untuk fokus ke email langsung tanpa diklik emailnya
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
 
   return (
     <>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState, useRef } from "react";
 import CardProduct from "../components/fragments/CardProduct";
 // import Counter from "../components/fragments/Counter";
