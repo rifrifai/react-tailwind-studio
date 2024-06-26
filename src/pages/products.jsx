@@ -88,7 +88,7 @@ export default function ProductsPage() {
     } else {
       totalPriceRef.current.style.display = "none";
     }
-  });
+  }, [cart]);
 
   return (
     <>
