@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState, useRef } from "react";
 import CardProduct from "../components/fragments/CardProduct";
+import { getProducts } from "../services/product.service";
 // import Counter from "../components/fragments/Counter";
 
 const products = [
@@ -38,6 +39,13 @@ export default function ProductsPage() {
   useEffect(() => {
     // parsing data cart dari local storage
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
+  }, []);
+
+  // memanggil products api
+  useEffect(() => {
+    getProducts((data) => {
+      console.info(data);
+    });
   }, []);
 
   // penggunaan useEffect terhadap total harga
