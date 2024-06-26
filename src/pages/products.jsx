@@ -4,30 +4,30 @@ import CardProduct from "../components/fragments/CardProduct";
 import { getProducts } from "../services/product.service";
 // import Counter from "../components/fragments/Counter";
 
-const products = [
-  {
-    id: 1,
-    name: "New Nike Air 1",
-    price: 1000000,
-    image: "/images/shoes-1.jpg",
-    description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia quae ad voluptatem maiores nobis esse, dolore animi rerum temporibus excepturi. Ipsa accusamus harum facilis quos ex consequatur sequi quasi ad?`,
-  },
+// const products = [
+//   {
+//     id: 1,
+//     name: "New Nike Air 1",
+//     price: 1000000,
+//     image: "/images/shoes-1.jpg",
+//     description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia quae ad voluptatem maiores nobis esse, dolore animi rerum temporibus excepturi. Ipsa accusamus harum facilis quos ex consequatur sequi quasi ad?`,
+//   },
 
-  {
-    id: 2,
-    name: "Adidas Black Current",
-    price: 3990000,
-    image: "/images/shoes-2.jpg",
-    description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa accusamus harum facilis quos ex consequatur sequi quasi ad?`,
-  },
-  {
-    id: 3,
-    name: "Black Mamba Puma",
-    price: 2499000,
-    image: "/images/shoes-3.jpg",
-    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae obcaecati expedita minus adipisci cumque quaerat fuga, dolorem aliquam quia nulla. Quos quaerat labore natus, enim quae maxime dolore distinctio unde.`,
-  },
-];
+//   {
+//     id: 2,
+//     name: "Adidas Black Current",
+//     price: 3990000,
+//     image: "/images/shoes-2.jpg",
+//     description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa accusamus harum facilis quos ex consequatur sequi quasi ad?`,
+//   },
+//   {
+//     id: 3,
+//     name: "Black Mamba Puma",
+//     price: 2499000,
+//     image: "/images/shoes-3.jpg",
+//     description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae obcaecati expedita minus adipisci cumque quaerat fuga, dolorem aliquam quia nulla. Quos quaerat labore natus, enim quae maxime dolore distinctio unde.`,
+//   },
+// ];
 
 // penggunaan useState akan langung di render/ tampilkan
 //  kalau useRef datanya disimpan tapi tampilannya tidk berubah
@@ -36,6 +36,8 @@ const email = localStorage.getItem("email");
 export default function ProductsPage() {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     // parsing data cart dari local storage
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
@@ -44,13 +46,13 @@ export default function ProductsPage() {
   // memanggil products api
   useEffect(() => {
     getProducts((data) => {
-      console.info(data);
+      setProducts(data);
     });
   }, []);
 
   // penggunaan useEffect terhadap total harga
   useEffect(() => {
-    if (cart.length > 0) {
+    if (products.length > 0 && cart.length > 0) {
       const sum = cart.reduce((acc, item) => {
         const product = products.find((product) => product.id === item.id);
         return acc + product.price * item.qty;
@@ -116,19 +118,20 @@ export default function ProductsPage() {
         {/* rendering list  */}
         <div className="w-3/4 flex flex-wrap">
           {" "}
-          {products.map((product) => (
-            <CardProduct key={product.id}>
-              <CardProduct.Header image={product.image} />
-              <CardProduct.Body name={product.name}>
-                {product.description}
-              </CardProduct.Body>
-              <CardProduct.Footer
-                price={product.price}
-                id={product.id}
-                handleAddToCart={handleAddToCart}
-              />
-            </CardProduct>
-          ))}
+          {products.length > 0 &&
+            products.map((product) => (
+              <CardProduct key={product.id}>
+                <CardProduct.Header image={product.image} />
+                <CardProduct.Body name={product.title}>
+                  {product.description}
+                </CardProduct.Body>
+                <CardProduct.Footer
+                  price={product.price}
+                  id={product.id}
+                  handleAddToCart={handleAddToCart}
+                />
+              </CardProduct>
+            ))}
         </div>
         <div className="w-1/4">
           <h1 className="text-3xl font-bold text-blue-600 ml-5 mb-2">Cart</h1>
@@ -149,31 +152,32 @@ export default function ProductsPage() {
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => {
-                const product = products.find(
-                  (product) => product.id === item.id
-                );
-                return (
-                  <tr key={item.id}>
-                    <td>{product.name}</td>
-                    <td>
-                      Rp.{" "}
-                      {product.price.toLocaleString("id-ID", {
-                        styles: "currency",
-                        currency: "IDR",
-                      })}
-                    </td>
-                    <td>{item.qty}</td>
-                    <td>
-                      Rp.{" "}
-                      {(item.qty * product.price).toLocaleString("id-ID", {
-                        styles: "currency",
-                        currency: "IDR",
-                      })}
-                    </td>
-                  </tr>
-                );
-              })}
+              {products.length > 0 &&
+                cart.map((item) => {
+                  const product = products.find(
+                    (product) => product.id === item.id
+                  );
+                  return (
+                    <tr key={item.id}>
+                      <td>{product.title}</td>
+                      <td>
+                        Rp.{" "}
+                        {product.price.toLocaleString("id-ID", {
+                          styles: "currency",
+                          currency: "IDR",
+                        })}
+                      </td>
+                      <td>{item.qty}</td>
+                      <td>
+                        Rp.{" "}
+                        {(item.qty * product.price).toLocaleString("id-ID", {
+                          styles: "currency",
+                          currency: "IDR",
+                        })}
+                      </td>
+                    </tr>
+                  );
+                })}
               <tr ref={totalPriceRef}>
                 <td colSpan={3}>
                   <b>Amount</b>
