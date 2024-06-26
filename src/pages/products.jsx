@@ -61,7 +61,7 @@ export default function ProductsPage() {
       // penyimpanan data cart ke local storage
       localStorage.setItem("cart", JSON.stringify(cart));
     }
-  }, [cart]);
+  }, [cart, products]);
 
   const handleLogout = () => {
     localStorage.removeItem("email");
@@ -159,20 +159,20 @@ export default function ProductsPage() {
                   );
                   return (
                     <tr key={item.id}>
-                      <td>{product.title}</td>
+                      <td>{product.title.substring(0, 10)}...</td>
                       <td>
-                        Rp.{" "}
+                        €.{" "}
                         {product.price.toLocaleString("id-ID", {
                           styles: "currency",
-                          currency: "IDR",
+                          currency: "EUR",
                         })}
                       </td>
                       <td>{item.qty}</td>
                       <td>
-                        Rp.{" "}
+                        €.{" "}
                         {(item.qty * product.price).toLocaleString("id-ID", {
                           styles: "currency",
-                          currency: "IDR",
+                          currency: "EUR",
                         })}
                       </td>
                     </tr>
@@ -184,7 +184,7 @@ export default function ProductsPage() {
                 </td>
                 <td>
                   <b>
-                    Rp.{" "}
+                    €.{" "}
                     {totalPrice.toLocaleString("id-ID", {
                       styles: "currency",
                       currency: "IDR",

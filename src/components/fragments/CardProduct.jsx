@@ -14,7 +14,11 @@ function Header({ image }) {
   return (
     <>
       <a href="#">
-        <img src={image} alt="shoes-1" className="p-8 rounded-t-lg w-72 h-64" />
+        <img
+          src={image}
+          alt="shoes-1"
+          className="p-8 rounded-t-lg w-72 h-64 object-cover"
+        />
       </a>
     </>
   );
@@ -26,9 +30,9 @@ function Body({ children, name }) {
       <div className="px-5 pb-5 h-full">
         <a href="#">
           <h5 className="text-xl font-semibold tracking-tight text-white">
-            {name}
+            {name.substring(0, 20)} ...
           </h5>
-          <p className="text-s text-white">{children}</p>
+          <p className="text-s text-white">{children.substring(0, 100)}...</p>
         </a>
       </div>
     </>
@@ -40,10 +44,10 @@ function Footer({ price, handleAddToCart, id }) {
     <>
       <div className="flex items-center justify-between px-5 pb-5">
         <span className="text-xl font-bold text-white">
-          Rp.{" "}
+          €.{" "}
           {price.toLocaleString("id-ID", {
             styles: "currency",
-            currency: "IDR",
+            currency: "EUR",
           })}
         </span>
         <button
