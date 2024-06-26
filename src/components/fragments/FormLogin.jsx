@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import InputForm from "../elements/input/Index";
 import Button from "../elements/button/Button";
+import { useRef } from "react";
 
 export default function FormLogin() {
   const handleLogin = (e) => {
@@ -14,6 +15,8 @@ export default function FormLogin() {
     window.location.href = "/products";
   };
 
+  const emailRef = useRef(null);
+
   return (
     <>
       <form onSubmit={handleLogin}>
@@ -22,6 +25,7 @@ export default function FormLogin() {
           type="email"
           placeholder="example@mail.com"
           name="email"
+          ref={emailRef}
         />
         <InputForm
           label="Password"
