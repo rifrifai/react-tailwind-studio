@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-no-undef */
 import InputForm from "../elements/input/Index";
 import Button from "../elements/button/Button";
-import { useRef } from "react";
-import { useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { login } from "../../services/auth.service";
 
 export default function FormLogin() {
+  const [loginFailed, setLoginFailed] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -19,7 +19,14 @@ export default function FormLogin() {
       username: event.target.username.value,
       password: event.target.password.value,
     };
-    login(data);
+    login(data, (status, res) => {
+      if (status) {
+        localStorage.setItem("token", res.token);
+      } else {
+        setLoginFailed(res.response.data);
+        console.info(res.response.data);
+      }
+    });
   };
 
   const usernameRef = useRef(null);
@@ -31,6 +38,7 @@ export default function FormLogin() {
   return (
     <>
       <form onSubmit={handleLogin}>
+        {loginFailed && <p className="text-red-500">{loginFailed}</p>}
         <InputForm
           label="Username"
           type="text"

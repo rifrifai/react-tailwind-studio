@@ -4,9 +4,9 @@ export const login = (data, callback) => {
   axios
     .post("https://fakestoreapi.com/auth/login", data)
     .then((res) => {
-      callback(res.token);
+      callback(true, res.token);
     })
     .catch((error) => {
-      callback(error);
+      callback(false, error);
     });
 };
