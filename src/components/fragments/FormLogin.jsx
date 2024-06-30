@@ -21,7 +21,8 @@ export default function FormLogin() {
     };
     login(data, (status, res) => {
       if (status) {
-        localStorage.setItem("token", res.token);
+        localStorage.setItem("token", res);
+        window.location.href = "/products";
       } else {
         setLoginFailed(res.response.data);
         console.info(res.response.data);
@@ -38,7 +39,6 @@ export default function FormLogin() {
   return (
     <>
       <form onSubmit={handleLogin}>
-        {loginFailed && <p className="text-red-500">{loginFailed}</p>}
         <InputForm
           label="Username"
           type="text"
@@ -53,6 +53,9 @@ export default function FormLogin() {
           name="password"
         />
         <Button text="Login" classname="bg-blue-600 w-full" type="submit" />
+        {loginFailed && (
+          <p className="text-red-500 text-center mt-3">{loginFailed}</p>
+        )}
       </form>
     </>
   );
