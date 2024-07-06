@@ -33,7 +33,6 @@ import { getUsername } from "../services/auth.service";
 // penggunaan useState akan langung di render/ tampilkan
 //  kalau useRef datanya disimpan tapi tampilannya tidk berubah
 
-const token = localStorage.getItem("token");
 export default function ProductsPage() {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -45,8 +44,14 @@ export default function ProductsPage() {
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
   }, []);
 
+  // memaksa ke login ketika tidak ada token
   useEffect(() => {
-    setUsername(getUsername(token));
+    const token = localStorage.getItem("token");
+    if (token) {
+      setUsername(getUsername(token));
+    } else {
+      window.location.href = "/login";
+    }
   }, []);
 
   // memanggil products api
