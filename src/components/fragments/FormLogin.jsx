@@ -25,7 +25,6 @@ export default function FormLogin() {
         window.location.href = "/products";
       } else {
         setLoginFailed(res.response.data);
-        console.info(res.response.data);
       }
     });
   };
@@ -60,3 +59,6 @@ export default function FormLogin() {
     </>
   );
 }
+
+// johnd
+// m38rmF$

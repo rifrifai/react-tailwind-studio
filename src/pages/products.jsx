@@ -2,6 +2,7 @@
 import { useEffect, useState, useRef } from "react";
 import CardProduct from "../components/fragments/CardProduct";
 import { getProducts } from "../services/product.service";
+import { getUsername } from "../services/auth.service";
 // import Counter from "../components/fragments/Counter";
 
 // const products = [
@@ -32,15 +33,20 @@ import { getProducts } from "../services/product.service";
 // penggunaan useState akan langung di render/ tampilkan
 //  kalau useRef datanya disimpan tapi tampilannya tidk berubah
 
-const email = localStorage.getItem("email");
+const token = localStorage.getItem("token");
 export default function ProductsPage() {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     // parsing data cart dari local storage
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
+  }, []);
+
+  useEffect(() => {
+    setUsername(getUsername(token));
   }, []);
 
   // memanggil products api
@@ -64,8 +70,7 @@ export default function ProductsPage() {
   }, [cart, products]);
 
   const handleLogout = () => {
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
+    localStorage.removeItem("token");
     window.location.href = "/login";
   };
 
@@ -104,7 +109,7 @@ export default function ProductsPage() {
   return (
     <>
       <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10">
-        {email}
+        {username}
         <button
           onClick={handleLogout}
           className="bg-black ml-5 h-10 px-6 font-semibold rounded-md"
