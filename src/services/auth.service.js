@@ -10,3 +10,5 @@ export const login = (data, callback) => {
       callback(false, error);
     });
 };
+
+// jtw-decode is so annoying
