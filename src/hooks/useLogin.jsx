@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { getUsername } from "../services/auth.service";
 
+// custom hooks agar bisa reusable
 export const useLogin = () => {
   const [username, setUsername] = useState("");
 
