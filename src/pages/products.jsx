@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import CardProduct from "../components/fragments/CardProduct";
 import { getProducts } from "../services/product.service";
 import { getUsername } from "../services/auth.service";
+import { useLogin } from "../hooks/useLogin";
 // import Counter from "../components/fragments/Counter";
 
 // const products = [
@@ -37,21 +38,11 @@ export default function ProductsPage() {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
-  const [username, setUsername] = useState("");
+  const username = useLogin();
 
   useEffect(() => {
     // parsing data cart dari local storage
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
-  }, []);
-
-  // memaksa ke login ketika tidak ada token
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setUsername(getUsername(token));
-    } else {
-      window.location.href = "/login";
-    }
   }, []);
 
   // memanggil products api
