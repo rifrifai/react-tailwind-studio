@@ -67,7 +67,7 @@ export default function ProductsPage() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/login";
+    window.location.href = "/";
   };
 
   const handleAddToCart = (id) => {

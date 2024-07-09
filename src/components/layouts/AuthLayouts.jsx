@@ -23,7 +23,7 @@ export default function AuthLayouts({ children, title, login, register }) {
             )}
 
             {register && (
-              <Link to="/login" className="font-bold text-blue-600">
+              <Link to="/" className="font-bold text-blue-600">
                 {register ? "Login" : "Sign Up"}
               </Link>
             )}
