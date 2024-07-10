@@ -104,7 +104,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10 ">
+      <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10 mx-auto">
         {username}
         <button
           onClick={handleLogout}
