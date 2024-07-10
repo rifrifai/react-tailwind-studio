@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
+
 // import Button from "../elements/button/Button";
 export default function CardProduct({ children }) {
   return (
@@ -10,16 +12,16 @@ export default function CardProduct({ children }) {
   );
 }
 
-function Header({ image }) {
+function Header({ image, id }) {
   return (
     <>
-      <a href="#">
+      <Link to={`/product/${id}`}>
         <img
           src={image}
           alt="shoes-1"
           className="p-8 rounded-t-lg w-72 h-64 object-cover"
         />
-      </a>
+      </Link>
     </>
   );
 }
