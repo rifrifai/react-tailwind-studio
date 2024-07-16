@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { legacy_createStore } from "redux";
 
 // reducer
 const cartReducer = (state = { cart: [{ id: 1, qty: 20 }] }, action) => {
@@ -14,7 +14,7 @@ const cartReducer = (state = { cart: [{ id: 1, qty: 20 }] }, action) => {
 };
 
 // store
-const store = createStore(cartReducer);
+const store = legacy_createStore(cartReducer);
 console.info("onCreate Store : ", store.getState());
 
 // subscribe
