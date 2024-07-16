@@ -1,3 +1,5 @@
+import { createStore } from "redux";
+
 // reducer
 const cartReducer = (state = { cart: [] }, action) => {
   switch (action.type) {
@@ -12,6 +14,8 @@ const cartReducer = (state = { cart: [] }, action) => {
 };
 
 // store
+const store = createStore(cartReducer);
+console.info("oncreate store : ", store.getState());
 
 // subcribe
 
