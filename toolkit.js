@@ -19,9 +19,9 @@ const cartReducer = createReducer([], (builder) => {
 
 const login = createAction("CREATE_SESSION");
 
-const loginReducer = createReducer(false, (builder) => {
+const loginReducer = createReducer({ status: false }, (builder) => {
   builder.addCase(login, (state, action) => {
-    state = true;
+    state.status = true;
   });
 });
 
@@ -41,3 +41,4 @@ store.subscribe(() => {
 // store.dispatch(action1);
 store.dispatch(addToCart({ id: 1, qty: 10 }));
 store.dispatch(addToCart({ id: 2, qty: 12 }));
+store.dispatch(login());
