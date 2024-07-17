@@ -17,16 +17,27 @@ const cartReducer = createReducer([], (builder) => {
   });
 });
 
+const login = createAction("CREATE_SESSION");
+
+const loginReducer = createReducer(false, (builder) => {
+  builder.addCase(login, (state, action) => {
+    state = true;
+  });
+});
+
 const store = configureStore({
   reducer: {
+    login: loginReducer,
     cart: cartReducer,
   },
 });
+console.info("onCreate Store :", store.getState());
 
 store.subscribe(() => {
   console.info("STORE CHANGE : ", store.getState());
 });
 
-const action1 = addToCart({ id: 1, qty: 100 });
-store.dispatch(action1);
-// store.dispatch(addToCart({ id: 1, qty: 10 }));
+// const action1 = addToCart({ id: 1, qty: 100 });
+// store.dispatch(action1);
+store.dispatch(addToCart({ id: 1, qty: 10 }));
+store.dispatch(addToCart({ id: 2, qty: 12 }));
