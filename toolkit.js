@@ -20,3 +20,6 @@ const store = configureStore({
     cart: cartReducer,
   },
 });
+
+const action2 = { type: "ADD_TO_CART", payload: { id: 1, qty: 1000 } };
+store.dispatch(action2);
