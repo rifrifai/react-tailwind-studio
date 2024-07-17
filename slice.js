@@ -11,3 +11,16 @@ const cartSlice = createSlice({
     },
   },
 });
+
+const store = configureStore({
+  reducer: {
+    cart: cartSlice.reducer,
+  },
+});
+console.info("onCreate Store :", store.getState());
+
+store.subscribe(() => {
+  console.info("STORE CHANGE : ", store.getState());
+});
+
+store.dispatch(cartSlice.actions.addToCart({ id: 3, qty: 30 }));
