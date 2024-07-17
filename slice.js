@@ -1,3 +1,5 @@
+// redux slice paling rekomendasi karena sangat singkat
+
 import * as toolkit from "@reduxjs/toolkit";
 
 const { configureStore, createSlice } = toolkit;
@@ -24,3 +26,4 @@ store.subscribe(() => {
 });
 
 store.dispatch(cartSlice.actions.addToCart({ id: 3, qty: 30 }));
+store.dispatch(cartSlice.actions.addToCart({ id: 4, qty: 3 }));
