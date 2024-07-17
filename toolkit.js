@@ -2,13 +2,15 @@ import toolkit from "@reduxjs/toolkit";
 
 const { configureStore, createAction, createReducer } = toolkit;
 
+const addToCart = createAction("ADD_TO_CART");
+
 // const intialState = {
 //   cart: [],
 // };
 // [] => initialState
 
 const cartReducer = createReducer([], (builder) => {
-  builder.addCase("ADD_TO_CART", (state, action) => {
+  builder.addCase(addToCart, (state, action) => {
     // ada 2 cara makainya
     // state.cart.push(action.payload);
     state.cart = [...state.cart, action.payload];
@@ -21,5 +23,5 @@ const store = configureStore({
   },
 });
 
-const action2 = { type: "ADD_TO_CART", payload: { id: 1, qty: 1000 } };
-store.dispatch(action2);
+const action1 = addToCart({ id: 1, qty: 100 });
+store.dispatch(action1);
