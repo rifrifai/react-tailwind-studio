@@ -1,4 +1,4 @@
-import toolkit from "@reduxjs/toolkit";
+import * as toolkit from "@reduxjs/toolkit";
 
 const { configureStore, createAction, createReducer } = toolkit;
 
@@ -12,8 +12,8 @@ const addToCart = createAction("ADD_TO_CART");
 const cartReducer = createReducer([], (builder) => {
   builder.addCase(addToCart, (state, action) => {
     // ada 2 cara makainya
-    // state.cart.push(action.payload);
-    state.cart = [...state.cart, action.payload];
+    state.push(action.payload);
+    // state.push = [...state.cart, action.payload];
   });
 });
 
@@ -23,5 +23,10 @@ const store = configureStore({
   },
 });
 
+store.subscribe(() => {
+  console.info("STORE CHANGE : ", store.getState());
+});
+
 const action1 = addToCart({ id: 1, qty: 100 });
 store.dispatch(action1);
+// store.dispatch(addToCart({ id: 1, qty: 10 }));
