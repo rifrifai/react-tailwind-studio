@@ -59,6 +59,3 @@ export default function FormLogin() {
     </>
   );
 }
-
-// johnd
-// m38rmF$
