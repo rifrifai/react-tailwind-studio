@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import CardProduct from "../components/fragments/CardProduct";
 import { getProducts } from "../services/product.service";
-import { getUsername } from "../services/auth.service";
 import { useLogin } from "../hooks/useLogin";
 import TableCart from "../components/fragments/TableCart";
+import Navbar from "../components/layouts/Navbar";
 // import Counter from "../components/fragments/Counter";
 
 // const products = [
@@ -39,7 +39,7 @@ export default function ProductsPage() {
   // const [cart, setCart] = useState([]);
   // const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
-  const username = useLogin();
+  useLogin();
 
   // useEffect(() => {
   //   // parsing data cart dari local storage
@@ -52,11 +52,6 @@ export default function ProductsPage() {
       setProducts(data);
     });
   }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-  };
 
   // const handleAddToCart = (id) => {
   //   // cara menambahkan qty
@@ -82,15 +77,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <div className="flex justify-end h-20 bg-blue-600 text-white items-center px-10 mx-auto">
-        {username}
-        <button
-          onClick={handleLogout}
-          className="bg-black ml-5 h-10 px-6 font-semibold rounded-md"
-        >
-          Logout
-        </button>
-      </div>
+      <Navbar />
       <div className="flex justify-center py-5">
         {/* ... nested component */}
 
